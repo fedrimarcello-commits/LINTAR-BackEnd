@@ -34,13 +34,11 @@ async function createUser(request, response, next) {
       confirm_password: confirmPassword,
     } = request.body;
 
-    // Validasi input tidak boleh kosong
     if (!nim) throw errorResponder(errorTypes.VALIDATION_ERROR, 'NIM is required');
     if (!namaLengkap) throw errorResponder(errorTypes.VALIDATION_ERROR, 'Nama Lengkap is required');
     if (!prodi) throw errorResponder(errorTypes.VALIDATION_ERROR, 'Prodi is required');
     if (!tahunMasuk) throw errorResponder(errorTypes.VALIDATION_ERROR, 'Tahun Masuk is required');
 
-    // NIM harus unik
     if (await usersService.nimExists(nim)) {
       throw errorResponder(errorTypes.EMAIL_ALREADY_TAKEN, 'NIM already exists');
     }
@@ -53,10 +51,8 @@ async function createUser(request, response, next) {
       throw errorResponder(errorTypes.VALIDATION_ERROR, 'Password and confirm password do not match');
     }
 
-    // Hash password
     const hashedPassword = await hashPassword(password);
 
-    // Create user ke database
     const success = await usersService.createUser(
       nim,
       hashedPassword,
