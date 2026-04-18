@@ -1,6 +1,6 @@
 const jadwalKuliahController = require('./JadwalKuliah-controller');
+const { authentication } = require('../../middlewares');
 
 module.exports = (router) => {
-  router.get('/jadwal-kuliah', jadwalKuliahController.getAll);
-  router.get('/jadwal-kuliah/:nim', jadwalKuliahController.getByNim);
+  router.get('/jadwal-kuliah', authentication, jadwalKuliahController.getByNim);
 };
