@@ -1,31 +1,40 @@
-module.exports = (db) =>
-  db.model(
-    'Biodata',
-    db.Schema({
-      nim: {
-        type: String,
+const mongoose = require('mongoose');
+
+const daftarBeasiswaSchema = new mongoose.Schema({
+    npm: { 
+        type: String, 
         required: true,
         unique: true
-      },
-
-      password: {
+    },
+    statusMahasiswa: { 
+        type: String, 
+        enum: ['Aktif', 'Cuti', 'Lulus', 'DO'], 
+        required: true 
+    },
+    semesterAktif: { 
+        type: Number, 
+        required: true 
+    },
+    ipk: { 
+        type: Number, 
+        required: true 
+    },
+    sudahIsiBiodata: { 
+        type: Boolean, 
+        required: true 
+    },
+    terimaBeasiswaLain: { 
+        type: Boolean, 
+        required: true, 
+        default: false 
+    },
+    statusPendaftaran: {
         type: String,
-        required: true
-      },
+        enum: ['Pending', 'Disetujui', 'Ditolak'],
+        default: 'Pending'
+    }
+}, { 
+    timestamps: true 
+});
 
-      namaLengkap: {
-        type: String,
-        required: true
-      },
-
-      prodi: {
-        type: String,
-        required: true
-      },
-
-      tahunMasuk: {
-        type: Number,
-        required: true
-      }, 
-    })
-  );
+module.exports = mongoose.model('DaftarBeasiswa', daftarBeasiswaSchema);

@@ -1,4 +1,4 @@
-const BiodataModel = require('../models/Mahasiswa'); 
+const BiodataModel = require('../models/Biodata'); 
 
 const createBiodata = async (data) => {
     const newBiodata = new BiodataModel(data);
