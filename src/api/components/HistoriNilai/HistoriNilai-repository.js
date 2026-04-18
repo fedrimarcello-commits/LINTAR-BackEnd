@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const HistoriNilai = mongoose.model('HistoriNilai');
 
 class HistoriNilaiRepository {

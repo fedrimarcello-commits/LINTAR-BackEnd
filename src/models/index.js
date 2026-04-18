@@ -5,9 +5,8 @@ const mongoose = require('mongoose');
 const config = require('../core/config');
 const logger = require('../core/logger')('app');
 
-
 mongoose.connect(config.database.connection, {
-  dbName: config.database.name
+  dbName: config.database.name,
 });
 
 const db = mongoose.connection;
@@ -26,7 +25,6 @@ fs.readdirSync(__dirname)
       file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
   )
   .forEach((file) => {
-    
     const model = require(path.join(__dirname, file))(mongoose);
     dbExports[model.modelName] = model;
   });
