@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const config = require('../core/config');
 const logger = require('../core/logger')('app');
 
-// Join the database connection string
+
 mongoose.connect(config.database.connection, {
   dbName: config.database.name
 });
@@ -26,7 +26,7 @@ fs.readdirSync(__dirname)
       file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
   )
   .forEach((file) => {
-    // eslint-disable-next-line import/no-dynamic-require, global-require
+    
     const model = require(path.join(__dirname, file))(mongoose);
     dbExports[model.modelName] = model;
   });
