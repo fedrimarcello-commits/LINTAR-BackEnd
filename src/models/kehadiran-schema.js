@@ -3,6 +3,7 @@ module.exports = (mongoose) => {
     nim: {
       type: String,
       required: true,
+      index: true,
     },
     no: {
       type: Number,

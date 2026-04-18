@@ -1,6 +1,7 @@
 module.exports = (app) => {
   const controller = require('./kehadiran-controller');
+  const authMiddlewares = require('../../middlewares/authentication');
 
-  app.get('/kehadiran/:nim', controller.getKehadiran);
-  app.post('/kehadiran/:nim', controller.createKehadiran);
+  app.get('/kehadiran', authMiddlewares, controller.getKehadiran);
+  app.post('/kehadiran', authMiddlewares, controller.createKehadiran);
 };

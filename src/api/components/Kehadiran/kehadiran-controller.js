@@ -3,7 +3,13 @@ const service = require('./kehadiran-service');
 module.exports = {
   getKehadiran: async (req, res, next) => {
     try {
-      const { nim } = req.params; // ✅ ambil NIM dari URL
+      const nim = req.userData?.nim;
+
+      if (!nim) {
+        return res.status(401).json({
+          message: 'Unauthorized: userData tidak ditemukan',
+        });
+      }
 
       const data = await service.getKehadiran(nim);
 
@@ -18,7 +24,20 @@ module.exports = {
 
   createKehadiran: async (req, res, next) => {
     try {
-      const data = await service.createKehadiran(req.body);
+      const nim = req.userData?.nim;
+
+      if (!nim) {
+        return res.status(401).json({
+          message: 'Unauthorized: userData tidak ditemukan',
+        });
+      }
+
+      const payload = {
+        ...req.body,
+        nim,
+      };
+
+      const data = await service.createKehadiran(payload);
 
       res.json({
         message: 'Berhasil tambah kehadiran',
