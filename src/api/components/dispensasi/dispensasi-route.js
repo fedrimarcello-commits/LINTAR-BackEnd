@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const controller = require('./dispensasi-controller');
-  const auth = require('../../middlewares/auth-middleware');
+  const authMiddlewares = require('../../middlewares/authentication');
 
-  app.get('/dispensasi', auth, controller.getDispensasi);
-  app.post('/dispensasi', auth, controller.createDispensasi);
+  app.get('/dispensasi', authMiddlewares, controller.getDispensasi);
+  app.post('/dispensasi', authMiddlewares, controller.createDispensasi);
 };
