@@ -3,7 +3,7 @@ const service = require('./dispensasi-service');
 module.exports = {
   getDispensasi: async (req, res, next) => {
     try {
-      const { nim } = req.params;
+      const { nim } = req.user;
 
       const data = await service.getDispensasi(nim);
 
@@ -18,7 +18,7 @@ module.exports = {
 
   createDispensasi: async (req, res, next) => {
     try {
-      const { nim } = req.params;
+      const { nim } = req.user;
 
       const data = await service.createDispensasi({
         ...req.body,
