@@ -1,20 +1,20 @@
-const BeasiswaModel = require('./DaftarBeasiswa-schema');
+const mongoose = require('mongoose');
 
-const createPendaftaran = async (data) => {
-    const newPendaftaran = new BeasiswaModel(data);
+const DaftarBeasiswa = mongoose.model('DaftarBeasiswa');
+
+class DaftarBeasiswaRepository {
+  async createPendaftaran(data) {
+    const newPendaftaran = new DaftarBeasiswa(data);
     return await newPendaftaran.save();
-};
+  }
 
-const findPendaftaranByNpm = async (npm) => {
-    return await BeasiswaModel.findOne({ npm: npm });
-};
+  async findPendaftaranByNim(nim) {
+    return await DaftarBeasiswa.findOne({ nim }).lean();
+  }
 
-const findAllPendaftaran = async () => {
-    return await BeasiswaModel.find();
-};
+  async findAllPendaftaran() {
+    return await DaftarBeasiswa.find().lean();
+  }
+}
 
-module.exports = {
-    createPendaftaran,
-    findPendaftaranByNpm,
-    findAllPendaftaran
-};
+module.exports = new DaftarBeasiswaRepository();
