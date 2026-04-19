@@ -10,15 +10,13 @@ async function login(nim, password) {
   const isMatch = await passwordMatched(password, user.password);
   if (!isMatch) return null;
 
-  const token = jwt.sign(
-    { userId: user._id, nim: user.nim },
-    'LINTARCUY',
-    { expiresIn: '1h' }
-  );
+  const token = jwt.sign({ userId: user._id, nim: user.nim }, 'LINTARCUY', {
+    expiresIn: '1h',
+  });
 
   return {
     token,
-    user: { nim: user.nim, namaLengkap: user.namaLengkap }
+    user: { nim: user.nim, namaLengkap: user.namaLengkap },
   };
 }
 
