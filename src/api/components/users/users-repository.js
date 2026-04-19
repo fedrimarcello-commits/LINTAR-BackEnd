@@ -8,12 +8,12 @@ async function getUser(id) {
   return Users.findById(id);
 }
 
-// Ganti getUserByEmail menjadi getUserByNim
+
 async function getUserByNim(nim) {
   return Users.findOne({ nim });
 }
 
-// Sesuaikan parameter dengan schema baru
+
 async function createUser(nim, password, namaLengkap, prodi, tahunMasuk) {
   return Users.create({ nim, password, namaLengkap, prodi, tahunMasuk });
 }
