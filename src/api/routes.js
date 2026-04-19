@@ -8,6 +8,7 @@ const khs = require('./components/khs/khs-route');
 const historiNilai = require('./components/HistoriNilai/HistoriNilai-route');
 const jadwalKuliah = require('./components/JadwalKuliah/JadwalKuliah-route');
 const uts = require('./components/uts/uts-route')
+const beasiswa = require('./components/DaftarBeasiswa/DaftarBeasiswa-route');
 
 module.exports = () => {
   const app = express.Router();
@@ -20,5 +21,6 @@ module.exports = () => {
   auth(app);
   khs(app);
   uts(app);
+  beasiswa(app);
   return app;
 };
