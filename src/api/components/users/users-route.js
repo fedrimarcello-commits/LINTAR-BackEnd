@@ -6,7 +6,6 @@ const route = express.Router();
 
 module.exports = (app) => {
   app.use('/users', route);
-
   
   route.get('/', usersController.getUsers);
 
