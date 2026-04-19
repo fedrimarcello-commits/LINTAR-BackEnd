@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { errorResponder, errorTypes } = require('../core/errors');
+const { errorResponder, errorTypes } = require('../../core/errors');
 
 module.exports = (request, response, next) => {
   try {
@@ -14,6 +14,11 @@ module.exports = (request, response, next) => {
     request.userData = { userId: decodedToken.userId, nim: decodedToken.nim };
     next();
   } catch (error) {
-    return next(errorResponder(errorTypes.UNAUTHORIZED, 'Sesi berakhir, silakan login ulang'));
+    return next(
+      errorResponder(
+        errorTypes.UNAUTHORIZED,
+        'Sesi berakhir, silakan login ulang'
+      )
+    );
   }
 };
