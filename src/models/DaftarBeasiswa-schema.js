@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 const daftarBeasiswaSchema = new mongoose.Schema({
-    npm: { 
+    nim: { 
         type: String, 
         required: true,
         unique: true
     },
     statusMahasiswa: { 
         type: String, 
-        enum: ['Aktif', 'Cuti', 'Lulus', 'DO'], 
+        enum: ['Aktif', 'Cuti', 'Lulus'], 
         required: true 
     },
     semesterAktif: { 
@@ -19,10 +19,7 @@ const daftarBeasiswaSchema = new mongoose.Schema({
         type: Number, 
         required: true 
     },
-    sudahIsiBiodata: { 
-        type: Boolean, 
-        required: true 
-    },
+
     terimaBeasiswaLain: { 
         type: Boolean, 
         required: true, 
@@ -30,11 +27,9 @@ const daftarBeasiswaSchema = new mongoose.Schema({
     },
     statusPendaftaran: {
         type: String,
-        enum: ['Pending', 'Disetujui', 'Ditolak'],
-        default: 'Pending'
+        enum: ['Menunggu', 'Disetujui', 'Ditolak'],
+        default: 'Menunggu'
     }
-}, { 
-    timestamps: true 
-});
+}, );
 
 module.exports = mongoose.model('DaftarBeasiswa', daftarBeasiswaSchema);

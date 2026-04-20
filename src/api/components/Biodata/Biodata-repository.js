@@ -1,20 +1,11 @@
-const BiodataModel = require('../models/Biodata'); 
+const mongoose = require('mongoose');
 
-const createBiodata = async (data) => {
-    const newBiodata = new BiodataModel(data);
-    return await newBiodata.save();
-};
+const Biodata = mongoose.model('Biodata');
 
-const findAllBiodata = async () => {
-    return await BiodataModel.find();
-};
+class BiodataRepository {
+  async findByNim(nim) {
+    return await Biodata.findOne({ nim }).lean();
+  }
+}
 
-const findBiodataByNpm = async (npm) => {
-    return await BiodataModel.findOne({ npm: npm });
-};
-
-module.exports = {
-    createBiodata,
-    findAllBiodata,
-    findBiodataByNpm
-};
+module.exports = new BiodataRepository();

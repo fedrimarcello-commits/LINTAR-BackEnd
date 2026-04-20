@@ -1,9 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const authentication = require('../../middlewares/authentication');
 const biodataController = require('./Biodata-controller');
 
-router.post('/', biodataController.createBiodata);
+const route = express.Router();
 
-router.get('/', biodataController.getBiodata);
+module.exports = (app) => {
+  app.use('/biodata', route);
 
-module.exports = router;
+  route.get('/', authentication, biodataController.getBiodata);
+};
