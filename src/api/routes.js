@@ -19,8 +19,8 @@ module.exports = () => {
 
   historiNilai(app);
   jadwalKuliah(app);
-  app.use(ajuanCuti());
-  app.use(biodata());
+  ajuanCuti(app);
+  biodata(app);
   users(app);
   kalenders(app);
   kehadiran(app);

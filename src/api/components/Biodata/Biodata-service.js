@@ -1,13 +1,9 @@
-module.exports = (db) => {
-  const repository = require('./biodata-repository')(db);
+const biodataRepository = require('./Biodata-repository');
 
-  return {
-    getBiodataByNim: async (nim) => {
-      const biodata = await repository.findByNim(nim);
-      if (!biodata) {
-        throw new Error('Data biodata tidak ditemukan');
-      }
-      return biodata;
-    },
-  };
+async function getBiodataByNim(nim) {
+  return await biodataRepository.findByNim(nim);
+}
+
+module.exports = {
+  getBiodataByNim,
 };
