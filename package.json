@@ -19,6 +19,7 @@
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^9.0.3",
     "method-override": "^3.0.0",
+    "mongodb": "^7.1.1",
     "mongoose": "^8.12.2",
     "pino": "^9.6.0",
     "pino-http": "^10.4.0"

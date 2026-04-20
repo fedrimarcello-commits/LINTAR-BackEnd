@@ -8,7 +8,7 @@ async function getUser(id) {
   return usersRepository.getUser(id);
 }
 
-// Ganti emailExists menjadi nimExists
+
 async function nimExists(nim) {
   const user = await usersRepository.getUserByNim(nim);
   return !!user; 
