@@ -27,7 +27,6 @@ module.exports = () => {
   dispensasi(app);
   khs(app);
   uts(app);
-  beasiswa(app);
-
+  app.use('/beasiswa', beasiswa);
   return app;
 };
