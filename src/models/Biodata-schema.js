@@ -1,87 +1,73 @@
 const mongoose = require('mongoose');
 
-const mahasiswaSchema = new mongoose.Schema({
-  
-  npm: { 
-    type: String, 
-    required: true, 
-    unique: true 
+const biodataSchema = new mongoose.Schema({
+  nim: {
+    type: String,
+    required: true,
+    unique: true
   },
-  namaMahasiswa: { 
-    type: String, 
-    required: true 
+  namaMahasiswa: {
+    type: String,
+    required: true
   },
-  noRekening: { 
-    type: String, 
-    default: null 
+  noRekening: {
+    type: String,
+    default: ''
   },
-  tempatLahir: { 
-    type: String, 
-    required: true 
+  tempatTanggalLahir: {
+    type: String,
+    required: true
   },
-  tanggalLahir: { 
-    type: Date, 
-    required: true 
+  jenisKelamin: {
+    type: String,
+    required: true,
+    enum: ['PRIA', 'WANITA']
   },
-  jenisKelamin: { 
-    type: String, 
-    enum: ['PRIA', 'WANITA'], 
-    required: true 
+  agama: {
+    type: String,
+    required: true
   },
-  agama: { 
-    type: String, 
-    required: true 
+  alamat: {
+    type: String,
+    required: true
   },
-  alamat: { 
-    type: String, 
-    required: true 
+  telepon: {
+    type: String,
+    default: '-'
   },
-  telepon: { 
-    type: String, 
-    default: null 
+  handphone: {
+    type: String,
+    required: true
   },
-  handphone: { 
-    type: String, 
-    required: true 
+  email: {
+    type: String,
+    required: true
   },
-  email: { 
-    type: String, 
-    required: true, 
-    unique: true,
-    lowercase: true
+  asalSekolah: {
+    type: String,
+    required: true
   },
-
-  dataSekolah: {
-    asalSekolah: { 
-      type: String, 
-      required: true 
-    },
-    noIjazah: { 
-      type: String, 
-      required: true 
-    },
-    tglIjazah: { 
-      type: Date, 
-      required: true 
-    }
+  noIjazah: {
+    type: String,
+    required: true
   },
-
-  dataOrangTua: {
-    namaOrangTua: { 
-      type: String, 
-      required: true 
-    },
-    alamat: { 
-      type: String, 
-      required: true 
-    },
-    telepon: { 
-      type: String, 
-      default: null 
-    }
+  tglIjazah: {
+    type: String,
+    required: true
+  },
+  namaOrangTuaWali: {
+    type: String,
+    required: true
+  },
+  alamatOrangTua: {
+    type: String,
+    required: true
+  },
+  teleponOrangTua: {
+    type: String,
+    default: '-'
   }
-}, { 
 });
-const Mahasiswa = mongoose.model('Mahasiswa', mahasiswaSchema);
 
-module.exports = Mahasiswa;
+const Biodata = mongoose.model('Biodata', biodataSchema);
+module.exports = Biodata;

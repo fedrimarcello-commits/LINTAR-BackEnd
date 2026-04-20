@@ -8,6 +8,8 @@ const dispensasi = require('./components/Dispensasi/dispensasi-route');
 const khs = require('./components/khs/khs-route');
 const historiNilai = require('./components/HistoriNilai/HistoriNilai-route');
 const jadwalKuliah = require('./components/JadwalKuliah/JadwalKuliah-route');
+const ajuanCuti = require('./components/AjuanCuti/AjuanCuti-route');
+const biodata = require('./components/Biodata/Biodata-route');
 const uts = require('./components/uts/uts-route');
 const beasiswa = require('./components/DaftarBeasiswa/DaftarBeasiswa-route');
 const UasOnline = require('./components/UasOnline/UasOnline-route');
@@ -17,6 +19,8 @@ module.exports = () => {
 
   historiNilai(app);
   jadwalKuliah(app);
+  app.use(ajuanCuti());
+  app.use(biodata());
   users(app);
   kalenders(app);
   kehadiran(app);
