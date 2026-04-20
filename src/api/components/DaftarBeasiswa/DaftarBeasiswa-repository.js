@@ -1,4 +1,4 @@
-const BeasiswaModel = require('./DaftarBeasiswa-schema');
+const BeasiswaModel = require('../../../models/DaftarBeasiswa-schema');
 
 const createPendaftaran = async (data) => {
     const newPendaftaran = new BeasiswaModel(data);
