@@ -20,10 +20,11 @@ class AjuanCutiRepository {
   }
 
   async updateByNim(nim, data) {
-    return await AjuanCuti.findOneAndUpdate({ nim }, data, {
-      new: true,
-      upsert: true,
-    });
+    return await AjuanCuti.findOneAndUpdate(
+      { nim }, 
+      data, 
+      { new: true, upsert: true }
+    );
   }
 
   async addPengajuan(nim, pengajuanData) {

@@ -1,49 +1,26 @@
-const biodataService = require('./biodata-service');
+// Perhatikan nama file di dalam require(), pastikan sama persis dengan nama file di folder Anda
+const biodataService = require('./Biodata-service');
 
-module.exports = (db) => {
-  const service = biodataService(db);
+async function getBiodata(req, res, next) {
+  try {
+    const { nim } = req.userData || req.user || {};
 
-  return {
-    getBiodata: async (req, res) => {
-      try {
-        const { nim } = req.userData;
-        if (!nim) {
-          return res
-            .status(400)
-            .json({ message: 'NIM tidak ditemukan di token' });
-        }
+    if (!nim) {
+      return res.status(400).json({ message: 'NIM tidak ditemukan di token' });
+    }
 
-        const biodata = await service.getBiodataByNim(nim);
+    const data = await biodataService.getBiodataByNim(nim);
 
-        const response = {
-          dataMahasiswa: {
-            npm: biodata.nim,
-            namaMahasiswa: biodata.namaMahasiswa,
-            noRekening: biodata.noRekening || '-',
-            tempatTanggalLahir: biodata.tempatTanggalLahir,
-            jenisKelamin: biodata.jenisKelamin,
-            agama: biodata.agama,
-            alamat: biodata.alamat,
-            telepon: biodata.telepon,
-            handphone: biodata.handphone,
-            email: biodata.email,
-          },
-          dataSekolah: {
-            asalSekolah: biodata.asalSekolah,
-            noIjazah: biodata.noIjazah,
-            tglIjazah: biodata.tglIjazah,
-          },
-          dataOrangTua: {
-            namaOrangTuaWali: biodata.namaOrangTuaWali,
-            alamat: biodata.alamatOrangTua,
-            telepon: biodata.teleponOrangTua,
-          },
-        };
+    if (!data) {
+      return res.status(404).json({ message: 'Data biodata tidak ditemukan' });
+    }
 
-        res.status(200).json(response);
-      } catch (error) {
-        res.status(500).json({ message: error.message });
-      }
-    },
-  };
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = {
+  getBiodata,
 };
