@@ -2,7 +2,7 @@ const repository = require('./kehadiran-repository');
 
 exports.getKehadiran = async (nim) => {
   if (!nim) {
-    const err = new Error('Unauthorized: NIM tidak ditemukan dari token');
+    const err = new Error('NIM tidak ditemukan dari token');
     err.statusCode = 401;
     throw err;
   }

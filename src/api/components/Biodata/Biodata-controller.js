@@ -1,9 +1,8 @@
-// Perhatikan nama file di dalam require(), pastikan sama persis dengan nama file di folder Anda
 const biodataService = require('./Biodata-service');
 
 async function getBiodata(req, res, next) {
   try {
-    const { nim } = req.userData || req.user || {};
+    const { nim } = req.userData ||{};
 
     if (!nim) {
       return res.status(400).json({ message: 'NIM tidak ditemukan di token' });
