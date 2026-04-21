@@ -1,11 +1,8 @@
-const express = require('express');
 const beasiswaController = require('./DaftarBeasiswa-controller');
 
-const route = express.Router();
-
 module.exports = (app) => {
-  app.use('/beasiswa', route);
+    
+    app.post('/beasiswa/daftar', beasiswaController.ajukanBeasiswa);
 
-  route.post('/daftar', beasiswaController.ajukanBeasiswa);
-
+    app.get('/beasiswa', beasiswaController.lihatDaftarBeasiswa);
 };
