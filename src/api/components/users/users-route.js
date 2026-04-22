@@ -2,6 +2,8 @@ const express = require('express');
 
 const usersController = require('./users-controller');
 
+const authentication = require('../../middlewares/authentication');
+
 const route = express.Router();
 
 module.exports = (app) => {
@@ -9,18 +11,11 @@ module.exports = (app) => {
   
   route.get('/', usersController.getUsers);
 
- 
   route.post('/', usersController.createUser);
-
   
   route.get('/:id', usersController.getUser);
 
-  
-  route.put('/:id', usersController.updateUser);
+  route.put('/chg', authentication,  usersController.updateUser);
 
-  
-  route.put('/:id/change-password', usersController.changePassword);
-
-  
-  route.delete('/:id', usersController.deleteUser);
+  route.delete('/del', authentication, usersController.deleteUser);
 };
