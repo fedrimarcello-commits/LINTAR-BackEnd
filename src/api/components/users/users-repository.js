@@ -18,16 +18,15 @@ async function createUser(nim, password, namaLengkap, prodi, tahunMasuk) {
   return Users.create({ nim, password, namaLengkap, prodi, tahunMasuk });
 }
 
-async function updateUser(id, nim, namaLengkap, prodi, tahunMasuk) {
-  return Users.updateOne({ _id: id }, { $set: { nim, namaLengkap, prodi, tahunMasuk } });
+async function updateUser(nim, namaLengkap, prodi, tahunMasuk) {
+  return Users.updateOne(
+    { nim: nim }, 
+    { $set: { namaLengkap, prodi, tahunMasuk } }
+  );
 }
 
-async function changePassword(id, password) {
-  return Users.updateOne({ _id: id }, { $set: { password } });
-}
-
-async function deleteUser(id) {
-  return Users.deleteOne({ _id: id });
+async function deleteUser(nim) {
+  return Users.deleteOne({ nim: nim });
 }
 
 module.exports = {
@@ -36,6 +35,5 @@ module.exports = {
   getUserByNim,
   createUser,
   updateUser,
-  changePassword,
   deleteUser,
 };

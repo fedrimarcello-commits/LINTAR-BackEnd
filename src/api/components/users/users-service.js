@@ -18,12 +18,13 @@ async function createUser(nim, password, namaLengkap, prodi, tahunMasuk) {
   return usersRepository.createUser(nim, password, namaLengkap, prodi, tahunMasuk);
 }
 
-async function updateUser(id, nim, namaLengkap, prodi, tahunMasuk) {
-  return usersRepository.updateUser(id, nim, namaLengkap, prodi, tahunMasuk);
+
+async function updateUser(nim, namaLengkap, prodi, tahunMasuk) {
+  return usersRepository.updateUser(nim, namaLengkap, prodi, tahunMasuk);
 }
 
-async function deleteUser(id) {
-  return usersRepository.deleteUser(id);
+async function deleteUser(nim) {
+  return usersRepository.deleteUser(nim);
 }
 
 module.exports = {
