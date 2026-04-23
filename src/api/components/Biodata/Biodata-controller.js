@@ -1,8 +1,9 @@
 const biodataService = require('./Biodata-service');
+const { errorResponder, errorTypes } = require('../../../core/errors');
 
 async function getBiodata(req, res, next) {
   try {
-    const { nim } = req.userData ||{};
+    const { nim } = req.userData || {};
 
     if (!nim) {
       return res.status(400).json({ message: 'NIM tidak ditemukan di token' });
@@ -20,6 +21,31 @@ async function getBiodata(req, res, next) {
   }
 }
 
+async function createBiodata(req, res, next) {
+  try {
+    const nimUser = req.userData.nim;
+
+    const existingBiodata = await biodataService.getBiodataByNim(nimUser);
+    if (existingBiodata) {
+      throw errorResponder(
+        errorTypes.UNPROCESSABLE_ENTITY, 
+        'Biodata untuk akun ini sudah terdaftar. Anda tidak dapat membuatnya lagi.'
+      );
+    }
+
+    const data = { ...req.body, nim: nimUser };
+    const result = await biodataService.createBiodata(data);
+    
+    return res.status(201).json({
+      message: 'Biodata berhasil disimpan',
+      data: result
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   getBiodata,
+  createBiodata,
 };

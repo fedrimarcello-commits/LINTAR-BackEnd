@@ -8,4 +8,6 @@ module.exports = (app) => {
   app.use('/biodata', route);
 
   route.get('/', authentication, biodataController.getBiodata);
+
+  route.post('/', authentication, biodataController.createBiodata);
 };
