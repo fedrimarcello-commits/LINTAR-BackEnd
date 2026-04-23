@@ -12,9 +12,6 @@ class DaftarBeasiswaRepository {
     return await DaftarBeasiswa.findOne({ nim }).lean();
   }
 
-  async findAllPendaftaran() {
-    return await DaftarBeasiswa.find().lean();
-  }
 }
 
 module.exports = new DaftarBeasiswaRepository();

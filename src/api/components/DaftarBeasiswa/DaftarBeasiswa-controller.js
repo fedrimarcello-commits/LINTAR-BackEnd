@@ -2,39 +2,46 @@ const beasiswaService = require('./DaftarBeasiswa-service');
 
 const ajukanBeasiswa = async (req, res) => {
     try {
-        const result = await beasiswaService.daftarBeasiswa(req.body);
+        const dataPendaftaran = {
+            ...req.body,
+            nim: req.userData.nim 
+        };
+        const result = await beasiswaService.daftarBeasiswa(dataPendaftaran);
         
-        res.status(201).json({
+        res.status(200).json({
             success: true,
             message: 'Pendaftaran beasiswa berhasil diajukan',
             data: result
         });
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             success: false,
             message: error.message
         });
     }
 };
 
-const lihatDaftarBeasiswa = async (req, res) => {
+
+const lihatHasil = async (req, res) => {
     try {
-        const result = await beasiswaService.getAllPendaftaran();
+        const nimUser = req.userData.nim; 
+
+        const result = await beasiswaService.getPendaftaran(nimUser);
         
         res.status(200).json({
             success: true,
-            message: 'Berhasil mengambil data pendaftaran beasiswa',
+            message: 'Berhasil mengambil hasil pendaftaran beasiswa',
             data: result
         });
     } catch (error) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
-            message: 'Terjadi kesalahan pada server'
+            message: error.message
         });
     }
 };
 
 module.exports = {
     ajukanBeasiswa,
-    lihatDaftarBeasiswa
+    lihatHasil
 };

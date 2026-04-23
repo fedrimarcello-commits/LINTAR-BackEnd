@@ -1,8 +1,9 @@
 const beasiswaController = require('./DaftarBeasiswa-controller');
-
+const authentication = require('../../middlewares/authentication');
 module.exports = (app) => {
     
-    app.post('/beasiswa/daftar', beasiswaController.ajukanBeasiswa);
+    app.post('/beasiswa/daftar', authentication, beasiswaController.ajukanBeasiswa);
 
-    app.get('/beasiswa', beasiswaController.lihatDaftarBeasiswa);
+    app.get('/beasiswa/hasil', authentication, beasiswaController.lihatHasil);
+    
 };
