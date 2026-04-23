@@ -18,14 +18,17 @@ async function submitAjuanCuti(nim, alasanCuti) {
 
   const existing = await ajuanCutiRepository.findByNim(nim);
 
-  if (!existing.ajuanCuti) {
+if (!existing.ajuanCuti) {
     await ajuanCutiRepository.create({
       nim,
       nama: biodata.namaMahasiswa,
       nomorPokokMahasiswa: nim,
       email: biodata.email,
       alamat: biodata.alamat,
-      teleponHp: biodata.handphone,
+      teleponHp: biodata.handphone, 
+      fakultasProgramStudi: biodata.programStudi,
+      tahunAkademikPengajuan: '2025/2026',
+      tanggalBukaPengajuan: new Date().toISOString().split('T')[0],
       daftarPengajuan: [],
     });
   }

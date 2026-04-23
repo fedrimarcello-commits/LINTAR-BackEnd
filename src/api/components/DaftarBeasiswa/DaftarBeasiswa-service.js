@@ -25,18 +25,22 @@ const daftarBeasiswa = async (data) => {
     }
 
     if (errorMessages.length > 0) {
-        const combinedError = 'Mohon Maaf, anda tidak dapat mendaftar Beasiswa Karena tidak memenuhi persyaratan berikut:\n. ' + errorMessages.join('\n. ');
+        const combinedError = 'Mohon Maaf, anda tidak dapat mendaftar Beasiswa Karena tidak memenuhi persyaratan berikut: ' + errorMessages.join('. ');
         throw new Error(combinedError);
     }
 
     return await beasiswaRepository.createPendaftaran(data);
 };
 
-const getAllPendaftaran = async () => {
-    return await beasiswaRepository.findAllPendaftaran();
+const getPendaftaran = async (nim) => {
+    const hasil = await beasiswaRepository.findPendaftaranByNim(nim);
+    if (!hasil) {
+        throw new Error('Data pendaftaran beasiswa tidak ditemukan untuk akun ini.');
+    }
+    return hasil;
 };
 
 module.exports = {
     daftarBeasiswa,
-    getAllPendaftaran
+    getPendaftaran,
 };

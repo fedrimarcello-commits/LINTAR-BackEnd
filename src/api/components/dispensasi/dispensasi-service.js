@@ -1,9 +1,20 @@
 const repository = require('./dispensasi-repository');
+const usersRepository = require('../users/users-repository');
+const { errorResponder, errorTypes } = require('../../../core/errors');
 
 exports.getDispensasi = async (nim) => await repository.getByNim(nim);
 
 exports.createDispensasi = async (data) => {
-  const tahunMasuk = parseInt(data.nim.substring(0, 4));
+  const user = await usersRepository.getUserByNim(data.nim);
+
+  if (!user) {
+    throw errorResponder(
+      errorTypes.UNPROCESSABLE_ENTITY, 
+      'Data mahasiswa tidak ditemukan di tabel Users. Pastikan akun sudah terdaftar.'
+    );
+  }
+
+  const tahunMasuk = user.tahunMasuk;
 
   let status = 'DAPAT MENGAJUKAN';
 

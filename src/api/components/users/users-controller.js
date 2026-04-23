@@ -73,20 +73,14 @@ async function createUser(request, response, next) {
 
 async function updateUser(request, response, next) {
   try {
-    // 1. Ambil NIM langsung dari token yang sedang login
     const nimUser = request.userData.nim; 
     
-    // 2. Ambil data baru dari body (nim tidak perlu di-update)
     const { namaLengkap, prodi, tahunMasuk } = request.body;
 
-    // 3. Cek apakah user dengan NIM tersebut ada
-    const userExists = await usersService.nimExists(nimUser);
-    if (!userExists) {
+    const updateResult = await usersService.updateUser(nimUser, namaLengkap, prodi, tahunMasuk);
+    if (updateResult.matchedCount === 0) {
       throw errorResponder(errorTypes.UNPROCESSABLE_ENTITY, 'User not found');
     }
-
-    // 4. Lakukan update berdasarkan NIM
-    await usersService.updateUser(nimUser, namaLengkap, prodi, tahunMasuk);
 
     return response.status(200).json({ message: 'Data mahasiswa berhasil diperbarui' });
   } catch (error) {

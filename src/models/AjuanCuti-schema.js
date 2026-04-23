@@ -5,7 +5,7 @@ module.exports = (db) =>
       nim: { type: String, required: true },
       nama: { type: String, required: true },
       nomorPokokMahasiswa: { type: String, required: true },
-      fakultasProgramStudi: { type: String, required: true },
+      fakultasProgramStudi: { type: String},
       alamat: { type: String, required: true },
       teleponHp: { type: String, default: '-' },
       email: { type: String, required: true },
