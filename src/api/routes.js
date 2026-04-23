@@ -12,7 +12,8 @@ const ajuanCuti = require('./components/AjuanCuti/AjuanCuti-route');
 const biodata = require('./components/Biodata/Biodata-route');
 const uts = require('./components/uts/uts-route');
 const beasiswa = require('./components/DaftarBeasiswa/DaftarBeasiswa-route');
-
+const ubahPassword = require('./components/UbahPassword/UbahPassword-route');
+const ubahNoHp = require('./components/UbahNoHp/UbahNoHp-route');
 module.exports = () => {
   const app = express.Router();
 
@@ -28,5 +29,7 @@ module.exports = () => {
   khs(app);
   uts(app);
   beasiswa(app);
+  ubahPassword(app);
+  ubahNoHp(app);
   return app;
 };
